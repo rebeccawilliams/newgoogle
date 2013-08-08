@@ -1,0 +1,31 @@
+body {
+  position: relative;
+  height: 100%;
+}
+
+header {
+  height: 50px;
+  border-bottom: 2px;
+  border-bottom-style: solid;
+  text-align: center;
+}
+
+main, form#search {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main {
+  max-width: 960px;
+}
+
+form#search input[name="terms"] {
+  float: left;
+  width: 30%;
+}
+
+
+.result {
+  background-color: red;
+}
