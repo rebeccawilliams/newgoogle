@@ -3,7 +3,7 @@ Type your search one search bar, and get results from all of the Socrata and CKA
 ## Technical
 This is a static website that calls the Socrata and CKAN APIs. Build like so.
 
-    browserify src/index.js > script.js
+    browserify index.js -o web/script.js
 
 ## References
 
