@@ -5,7 +5,8 @@
     "main": "index.js",
     "dependencies": {
         "browser-request": "~0.2.1",
-        "request": ">=0.0.1"
+        "director": "~1.2.0",
+        "request": "~2.26.0"
     },
     "devDependencies": {
         "tap": "~0.4.0"

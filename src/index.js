@@ -226,7 +226,6 @@ exports.main = function(_paq /* for tracking; send an empty array if you don't w
       var enough_time_passed = (new Date() - exports._prev_search_date) > 500
       var has_new_terms = exports._prev_search_terms !== exports.terms()
       if (enough_time_passed && has_new_terms) {
-        _paq.push(['trackSiteSearch', exports.terms(), false, 1 * exports.page])
         exports.page = 1
         exports._prev_search_terms = exports.terms()
 //      exports.search_portals()
