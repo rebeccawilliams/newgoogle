@@ -65,6 +65,65 @@ exports.socrata_portals = [
 exports.socrata_portals = []
 exports.ckan_portals = [
   'datahub.io'
+  'opendata.comune.bari.it',
+  'africaopendata.org',
+  'www.amsterdamopendata.nl/home',
+  'opendata.aragon.es',
+  'daten.berlin.de',
+  'data.buenosaires.gob.ar',
+  'ie.ckan.net',
+  'it.ckan.net',
+  'rs.ckan.net',
+  'br.ckan.net',
+  'datos.codeandomexico.org',
+  'cz.ckan.net',
+  'dados.gov.br',
+  'dadosabertos.senado.gov.br',
+  'dados.novohamburgo.rs.gov.br',
+  'data.gv.at',
+  'data.linz.gv.at',
+  'fi.thedatahub.org',
+  'data.norge.no',
+  'data.sa.gov.au',
+  'www.data.gc.ca',
+  'data.gov.sk',
+  'data.gov.uk/data',
+  'data.qld.gov.au',
+  'data.openpolice.ru',
+  'datacatalogs.org',
+  'www.datagm.org.uk',
+  'datagov.ru',
+  'datakilder.no',
+  'datospublicos.org',
+  'data.denvergov.org',
+  'ckan.emap.fgv.br',
+  'open-data.europa.eu',
+  'www.healthdata.gov',
+  'www.hri.fi',
+  'data.graz.gv.at',
+  'daten.hamburg.de',
+  'data.codeforhouston.com',
+  'iatiregistry.org',
+  'data.klp.org.in',
+  'thedatahub.kr',
+  'www.nosdonnees.fr',
+  'offenedaten.de',
+  'data.opencolorado.org',
+  'catalog.opendata.in.th',
+  'www.opendatahub.it',
+  'dati.trentino.it',
+  'data.openva.com',
+  'www.opendata-hro.de',
+  'opengov.es',
+  'data.ottawa.ca',
+  'data.overheid.nl',
+  'www.opendata.provincia.roma.it',
+  'publicdata.eu',
+  'www.daten.rlp.de',
+  'www.rotterdamopendata.nl',
+  'data.cityofsantacruz.com',
+  'thedatahub.org',
+  'dati.toscana.it'
 ]
 
 exports.socrata = function(terms, portal, page, callback) {
@@ -80,7 +139,7 @@ exports.socrata = function(terms, portal, page, callback) {
 }
 
 exports.ckan = function(terms, portal, page) {
-  var url = 'http://' + portal + '/api/3/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
+  var url = 'http://' + portal + '/api/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
     var results = JSON.parse(body).results
     if (results.length > 0){
