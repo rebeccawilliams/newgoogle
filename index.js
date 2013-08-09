@@ -75,7 +75,7 @@ exports.socrata = function(terms, portal, page, callback) {
 exports.all_portals = function() {
   exports.portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
-      document.getElementById('result') += (view.name + '\n')
+      document.getElementById(portal).innerText = view.name
     })
   })
 }
@@ -103,6 +103,10 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 */
 
 window.openprism = exports
+
+exports.portals.map(function(portal) {
+  document.getElementById('result').innerHTML += '<div id="' + portal + '" class="dataset"></div>'
+})
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
   exports.page = 1
