@@ -9,6 +9,16 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
+exports.page = 1
+exports.increment_page = function(increment) {
+  exports.page += increment
+}
+exports.next = function() {
+  exports.increment_page(1)
+}
+exports.prev = function() {
+  if (exports.page > 1) { exports.increment_page(-1) }
+}
 
 /*
 exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
