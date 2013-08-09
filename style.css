@@ -11,7 +11,7 @@ header {
 }
 
 main, form#search {
-  width: 100%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -21,8 +21,9 @@ main {
 }
 
 form#search input[name="terms"] {
-  float: left;
-  width: 30%;
+  width: 80%;
+  height: 2em;
+  margin-top: 0.5em;
 }
 
 
