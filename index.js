@@ -91,7 +91,6 @@ exports.ckan = function(terms, portal, page, callback) {
 
 exports.all_portals = function() {
   document.querySelector('#search a').setAttribute('style', '')
-  /*
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
       document.getElementById(portal).setAttribute('style', '')
@@ -105,7 +104,6 @@ exports.all_portals = function() {
       em.innerText = portal
     })
   })
-  */
   exports.ckan_portals.map(function(portal) {
     exports.ckan(exports.terms(), portal, exports.page, function(id){
       document.getElementById(portal).setAttribute('style', '')
@@ -138,14 +136,9 @@ exports.terms = function() {
   return document.querySelector('#search > input[name="terms"]').value
 }
 
-/*
-exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
-})
-*/
-
 window.openprism = exports
 
-exports.ckan_portals.map(function(portal) {
+exports.socrata_portals.concat(exports.ckan_portals).map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
