@@ -79,7 +79,7 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
-exports.ckan = function(terms, portal, page, callback) {
+exports.ckan = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/3/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
     var results = JSON.parse(body).results
@@ -87,10 +87,23 @@ exports.ckan = function(terms, portal, page, callback) {
       var id = results[0]
       request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
         var dataset = JSON.parse(body)
-        return callback(dataset)
+        var url = 'http://' + portal + '/dataset/' + id
+        return exports.render_result(portal, url, dataset.name, dataset.notes)
       }
     }
   })
+}
+
+exports.render_result = function(portal, href, name, description) {
+  document.getElementById(portal).setAttribute('style', '')
+  var a = document.querySelector('div[id="' + portal + '"] a')
+  var em = document.querySelector('div[id="' + portal + '"] em')
+  var p = document.querySelector('div[id="' + portal + '"] p')
+
+  a.href = href
+  a.innerText = name
+  p.innerText = description
+  em.innerText = portal
 }
 
 exports.all_portals = function() {
@@ -109,17 +122,7 @@ exports.all_portals = function() {
     })
   })
   exports.ckan_portals.map(function(portal) {
-    exports.ckan(exports.terms(), portal, exports.page, function(id){
-      document.getElementById(portal).setAttribute('style', '')
-      var a = document.querySelector('div[id="' + portal + '"] a')
-      var em = document.querySelector('div[id="' + portal + '"] em')
-      var p = document.querySelector('div[id="' + portal + '"] p')
-
-      a.href = 'http://' + portal + '/dataset/' + id
-      a.innerText = id
-      p.innerText = '' 
-      em.innerText = portal
-    })
+    exports.ckan(exports.terms(), portal, exports.page)
   })
 }
 
