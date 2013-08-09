@@ -3,6 +3,9 @@
 
 var request = require('request')
 
-request('http://datacatalogs.org/api/rest/group/ckan', function(err, res, body) {
-  console.log(body)
-})
+function group(callback) {
+  // List the CKAN group of entries in datacatologs.org.
+  request('http://datacatalogs.org/api/rest/group/ckan', function(err, res, body) {
+    callback(JSON.parse(body).packages)
+  })
+}
