@@ -137,6 +137,10 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
+exports.is_json = function(res) {
+  return res.headers['content-type'].replace(' ', '').split(';')[0] === 'application/json'
+}
+
 exports.ckan = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
@@ -144,7 +148,7 @@ exports.ckan = function(terms, portal, page) {
     if (results.length > 0){
       var id = results[0]
       request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
-        if (!err) {
+        if (!err && is_json(res)) {
           var dataset = JSON.parse(body)
           var url = 'http://' + portal + '/dataset/' + id
           return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
