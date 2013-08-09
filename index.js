@@ -81,9 +81,7 @@ exports.ckan = function(terms, portal, page, callback) {
     var results = JSON.parse(body).results
     if (results.length > 0){
       var id = results[0]
-      request('http://' + portal + '/dataset/' + id, function(err, res, body) {
-        return callback(view)
-      })
+      return callback(id)
     }
   })
 }
@@ -100,6 +98,19 @@ exports.all_portals = function() {
       a.href = 'http://' + portal + '/-/-/' + view.id
       a.innerText = view.name
       p.innerText = view.description
+      em.innerText = portal
+    })
+  })
+  exports.ckan_portals.map(function(portal) {
+    exports.ckan(exports.terms(), portal, exports.page, function(id){
+      document.getElementById(portal).setAttribute('style', '')
+      var a = document.querySelector('div[id="' + portal + '"] a')
+      var em = document.querySelector('div[id="' + portal + '"] em')
+      var p = document.querySelector('div[id="' + portal + '"] p')
+
+      a.href = 'http://' + portal + '/dataset/' + id
+      a.innerText = id
+      p.innerText = '' 
       em.innerText = portal
     })
   })
