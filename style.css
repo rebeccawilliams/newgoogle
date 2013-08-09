@@ -49,7 +49,10 @@ header h1 {
 }
 
 header nav {
-  margin: 0.5em;
+  margin: 0.4em;
+}
+header nav {
+  line-height: 1.3em;
 }
 
 main, #search {
