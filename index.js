@@ -92,6 +92,11 @@ exports.prev = function() {
   if (exports.page > 1) { exports.increment_page(-1) }
 }
 
+
+exports.terms = function() {
+  return document.querySelector('#search > input[name="terms"]').value
+}
+
 /*
 exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 })
