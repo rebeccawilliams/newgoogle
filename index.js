@@ -112,3 +112,6 @@ document.querySelector('#search > input[name="terms"]').addEventListener('change
   exports.page = 1
   exports.all_portals()
 })
+
+// document.getElementById('next').addEventListener('click', exports.next)
+// document.getElementById('prev').addEventListener('click', exports.prev)
