@@ -144,9 +144,11 @@ exports.ckan = function(terms, portal, page) {
     if (results.length > 0){
       var id = results[0]
       request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
-        var dataset = JSON.parse(body)
-        var url = 'http://' + portal + '/dataset/' + id
-        return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
+        if (!err) {
+          var dataset = JSON.parse(body)
+          var url = 'http://' + portal + '/dataset/' + id
+          return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
+        }
       })
     }
   })
@@ -214,7 +216,11 @@ exports.portals().map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
 })
 
-document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
-  exports.page = 1
-  exports.search_portals()
+exports._prevterms = exports.terms()
+document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
+  if (exports._prevterms !== exports.terms()) {
+    exports.page = 1
+    exports.search_portals()
+  }
+  exports._prevterms = exports.terms()
 })
