@@ -89,7 +89,7 @@ exports.ckan = function(terms, portal, page) {
         var dataset = JSON.parse(body)
         var url = 'http://' + portal + '/dataset/' + id
         return exports.render_result(portal, url, dataset.name, dataset.notes)
-      }
+      })
     }
   })
 }
@@ -121,7 +121,7 @@ exports.portals = function() {
 }
 
 exports.search_portals = function() {
-  export.portals().map(exports.clear_result)
+  exports.portals().map(exports.clear_result)
   document.querySelector('#search a').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
