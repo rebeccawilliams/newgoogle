@@ -124,6 +124,7 @@ exports.ckan_portals = [
   'thedatahub.org',
   'dati.toscana.it'
 ]
+exports.socrata_portals = []
 
 exports.socrata = function(terms, portal, page, callback) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
@@ -137,23 +138,21 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
-exports.is_json = function(res) {
-  return res.headers['content-type'].replace(' ', '').split(';')[0] === 'application/json'
-}
-
 exports.ckan = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
-    var results = JSON.parse(body).results
-    if (results.length > 0){
-      var id = results[0]
-      request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
-        if (!err && is_json(res)) {
-          var dataset = JSON.parse(body)
-          var url = 'http://' + portal + '/dataset/' + id
-          return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
-        }
-      })
+    if (!err) {
+      var results = JSON.parse(body).results
+      if (results.length > 0){
+        var id = results[0]
+        request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
+          if (!err) {
+            var dataset = JSON.parse(body)
+            var url = 'http://' + portal + '/dataset/' + id
+            return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
+          }
+        })
+      }
     }
   })
 }
@@ -220,11 +219,17 @@ exports.portals().map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
 })
 
-exports._prevterms = exports.terms()
+exports._prev_search_terms = exports.terms()
+exports._prev_search_date  = new Date() // So it'll search the first time you press a key. A bit slow, but easy to code and nice feedback
 document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
-  if (exports._prevterms !== exports.terms()) {
-    exports.page = 1
-    exports.search_portals()
-  }
-  exports._prevterms = exports.terms()
+  exports._prev_search_date = new Date()
+  setTimeout(function() {
+    var enough_time_passed = (new Date() - exports._prev_search_date) > 500
+    var has_new_terms = exports._prev_search_terms !== exports.terms()
+    if (enough_time_passed && has_new_terms) {
+      exports.page = 1
+      exports._prev_search_terms = exports.terms()
+      exports.search_portals()
+    }
+  }, 500)
 })
