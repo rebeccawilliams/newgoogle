@@ -72,9 +72,9 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
-exports.all_portals = function(page) {
+exports.all_portals = function() {
   exports.portals.map(function(portal) {
-    exports.socrata(exports.terms(), portal, page, function(view){
+    exports.socrata(exports.terms(), portal, exports.page, function(view){
       document.getElementById('result') += (view.name + '\n')
     })
   })
@@ -103,3 +103,8 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 */
 
 window.openprism = exports
+
+document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
+  exports.page = 1
+  exports.all_portals()
+})
