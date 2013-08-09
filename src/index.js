@@ -184,7 +184,12 @@ exports.portals = function() {
   return exports.socrata_portals.concat(exports.ckan_portals)
 }
 
-exports.search_portals = function() {
+exports.search = function(_paq) {
+  var url = [location.protocol, '//', location.host, location.pathname].join('')
+  var hash = '/' + encodeURIComponent(exports.terms()) + '/' + exports.page
+  window.location.hash = hash
+  _paq.push(['trackPageView', url + '#' + hash])
+
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
@@ -195,10 +200,9 @@ exports.search_portals = function() {
   })
 }
 
-exports.page = 1
 exports.increment_page = function(increment) {
   exports.page += increment
-  exports.search_portals(exports.page)
+  exports.search()
 }
 exports.next = function() {
   exports.increment_page(1)
@@ -219,7 +223,7 @@ exports.portals().map(function(portal) {
 exports._prev_search_terms = exports.terms()
 exports._prev_search_date  = new Date() // So it'll search the first time you press a key. A bit slow, but easy to code and nice feedback
 
-exports.main = function(_paq /* for tracking; send an empty array if you don't want that */) {
+exports.add_listener = function(_paq /* for tracking */) {
   document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
     exports._prev_search_date = new Date()
     setTimeout(function() {
@@ -228,10 +232,27 @@ exports.main = function(_paq /* for tracking; send an empty array if you don't w
       if (enough_time_passed && has_new_terms) {
         exports.page = 1
         exports._prev_search_terms = exports.terms()
-//      exports.search_portals()
+
+        exports.search(_paq)
       }
     }, 500)
   })
+}
+
+exports.main = function(_paq /* for tracking */) {
+  var path = window.location.hash.split('/')
+  exports.add_listener(_paq)
+
+  if (path.length === 3) {
+    var search = path[1]
+    var page = path[2]
+
+    document.querySelector('#search > input[name="terms"]').value = decodeURIComponent(search)
+    exports.page = (1 * page) || 1
+    exports.search()
+  } else {
+    exports.page = 1
+  }
 }
 
 window.openprism = exports

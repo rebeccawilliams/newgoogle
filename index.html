@@ -26,7 +26,6 @@
       <div id="result"></div>
     </main>
   </body>
-  <script src="bundle.js" charset="utf-8"></script>
   <!-- Piwik -->
   <script type="text/javascript">
     var _paq = _paq || [];
@@ -42,5 +41,6 @@
     })();
   </script>
   <!-- End Piwik Code -->
-  <script>openprism.main(_paq)</script>
+  <script src="bundle.js" charset="utf-8"></script>
+  <script>setTimeout(function() { openprism.main(_paq)}, 2000)</script>
 </html>
