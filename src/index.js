@@ -232,7 +232,7 @@ exports.add_listener = function() {
     setTimeout(function() {
       var enough_time_passed = (new Date() - exports._prev_search_date) > 300
       var has_new_terms = exports._prev_search_terms !== exports.terms()
-      if (enough_time_passed && has_new_terms) {
+      if (enough_time_passed && has_new_terms && exports.terms() !== '') {
         exports.page = 1
         exports._prev_search_terms = exports.terms()
 
