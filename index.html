@@ -29,7 +29,9 @@
   <!-- Piwik -->
   <script type="text/javascript">
     var _paq = _paq || [];
-    _paq.push(["trackPageView"]);
+    if (window.location.hash === '') {
+      _paq.push(["trackPageView"]);
+    }
     _paq.push(["enableLinkTracking"]);
 
     (function() {
@@ -42,5 +44,5 @@
   </script>
   <!-- End Piwik Code -->
   <script src="bundle.js" charset="utf-8"></script>
-  <script>setTimeout(function() { openprism.main(_paq)}, 2000)</script>
+  <script>openprism.main()</script>
 </html>

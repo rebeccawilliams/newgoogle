@@ -184,11 +184,13 @@ exports.portals = function() {
   return exports.socrata_portals.concat(exports.ckan_portals)
 }
 
-exports.search = function(_paq) {
+exports.search = function() {
   var url = [location.protocol, '//', location.host, location.pathname].join('')
   var hash = '/' + encodeURIComponent(exports.terms()) + '/' + exports.page
   window.location.hash = hash
-  _paq.push(['trackPageView', url + '#' + hash])
+  if (window._paq) {
+    window._paq.push(['trackPageView', url + '#' + hash])
+  }
 
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
@@ -223,7 +225,7 @@ exports.portals().map(function(portal) {
 exports._prev_search_terms = exports.terms()
 exports._prev_search_date  = new Date() // So it'll search the first time you press a key. A bit slow, but easy to code and nice feedback
 
-exports.add_listener = function(_paq /* for tracking */) {
+exports.add_listener = function() {
   document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
     exports._prev_search_date = new Date()
     setTimeout(function() {
@@ -233,15 +235,15 @@ exports.add_listener = function(_paq /* for tracking */) {
         exports.page = 1
         exports._prev_search_terms = exports.terms()
 
-        exports.search(_paq)
+        exports.search()
       }
     }, 500)
   })
 }
 
-exports.main = function(_paq /* for tracking */) {
+exports.main = function() {
   var path = window.location.hash.split('/')
-  exports.add_listener(_paq)
+  exports.add_listener()
 
   if (path.length === 3) {
     var search = path[1]
