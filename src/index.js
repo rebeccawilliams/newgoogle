@@ -124,7 +124,6 @@ exports.ckan_portals = [
   'thedatahub.org',
   'dati.toscana.it'
 ]
-exports.socrata_portals = []
 
 exports.socrata = function(terms, portal, page, callback) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
@@ -158,9 +157,9 @@ exports.ckan = function(terms, portal, page) {
 }
 
 exports.clear_result = function(portal) {
-  var a = document.querySelector('div[id="' + portal + '"] a')
-  var em = document.querySelector('div[id="' + portal + '"] em')
-  var desc = document.querySelector('div[id="' + portal + '"] .desc')
+  var a = document.querySelector('section[id="' + portal + '"] a')
+  var em = document.querySelector('section[id="' + portal + '"] em')
+  var desc = document.querySelector('section[id="' + portal + '"] .desc')
 
   a.innerText = ''
   desc.innerHTML = ''
@@ -171,9 +170,9 @@ exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
   document.getElementById('loading').setAttribute('style', 'display: none;')
   document.querySelector('#search a').setAttribute('style', '')
-  var a = document.querySelector('div[id="' + portal + '"] a')
-  var em = document.querySelector('div[id="' + portal + '"] em')
-  var desc = document.querySelector('div[id="' + portal + '"] .desc')
+  var a = document.querySelector('section[id="' + portal + '"] a')
+  var em = document.querySelector('section[id="' + portal + '"] em')
+  var desc = document.querySelector('section[id="' + portal + '"] .desc')
 
   a.href = href
   a.innerText = name
@@ -216,7 +215,7 @@ exports.terms = function() {
 window.openprism = exports
 
 exports.portals().map(function(portal) {
-  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
+  document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h1><a href=""></a></h1><em class="portal"></em><div class="desc"></div></section>'
 })
 
 exports._prev_search_terms = exports.terms()
