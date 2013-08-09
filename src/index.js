@@ -74,7 +74,7 @@ exports.socrata = function(terms, portal, page, callback) {
     if (results.length > 0){
       var view = results[0].view
       var url = 'http://' + portal + '/-/-/' + view.id
-      return exports.render_result(portal, url, view.name, view.description)
+      return exports.render_result(portal, url, view.name, '<p>' + view.description + '</p>')
     }
   })
 }
@@ -88,7 +88,7 @@ exports.ckan = function(terms, portal, page) {
       request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
         var dataset = JSON.parse(body)
         var url = 'http://' + portal + '/dataset/' + id
-        return exports.render_result(portal, url, dataset.name, dataset.notes)
+        return exports.render_result(portal, url, dataset.title, dataset.notes_rendered)
       })
     }
   })
@@ -97,10 +97,10 @@ exports.ckan = function(terms, portal, page) {
 exports.clear_result = function(portal) {
   var a = document.querySelector('div[id="' + portal + '"] a')
   var em = document.querySelector('div[id="' + portal + '"] em')
-  var p = document.querySelector('div[id="' + portal + '"] p')
+  var desc = document.querySelector('div[id="' + portal + '"] .desc')
 
   a.innerText = ''
-  p.innerText = ''
+  desc.innerHTML = ''
   em.innerText = ''
 }
 
@@ -108,11 +108,11 @@ exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
   var a = document.querySelector('div[id="' + portal + '"] a')
   var em = document.querySelector('div[id="' + portal + '"] em')
-  var p = document.querySelector('div[id="' + portal + '"] p')
+  var desc = document.querySelector('div[id="' + portal + '"] .desc')
 
   a.href = href
   a.innerText = name
-  p.innerText = description
+  desc.innerHTML = description
   em.innerText = portal
 }
 
@@ -151,7 +151,7 @@ exports.terms = function() {
 window.openprism = exports
 
 exports.portals().map(function(portal) {
-  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
+  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {

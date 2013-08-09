@@ -39,6 +39,17 @@ body {
 h2:before {
   content: '## '
 }
+h3:before {
+  content: '### '
+}
+h4:before {
+  content: '#### '
+}
+h5:before {
+  content: '##### '
+}
+
+
 em {
   font-style: normal;
 }
@@ -49,7 +60,7 @@ em:after {
   content: '*'
 }
 
-h2, em, p {
+h2, h3, h4, h5, em, p {
   margin: 0;
   padding: 0;
   font-size: 12px;
@@ -59,7 +70,7 @@ a, a:visited, a:hover, a:active {
   color: inherit;
 }
 a, a:visited {
-  text-decoration: inherit;
+  text-decoration: underline;
 }
 a:hover, a:active {
   text-decoration: inherit;
