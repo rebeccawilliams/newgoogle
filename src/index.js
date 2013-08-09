@@ -176,7 +176,7 @@ exports.render_result = function(portal, href, name, description) {
 
   a.href = href
   a.innerText = name
-  desc.innerHTML = description
+  desc.innerHTML = (typeof(description) === 'undefined') ? '' : description
   em.innerText = portal
 }
 
@@ -255,6 +255,20 @@ exports.main = function() {
   } else {
     exports.page = 1
   }
+
+
+
+
+  // Random placeholder
+  var placeholders = [
+     'crime, death, earmarks, foia, ...',
+     'schools, sewers, shelters, spending, ...',
+     'bunny, kitten, hamster, elephant, ...'
+  ]
+  var placeholder = placeholders[Math.floor(Math.random()*words.length)]
+  document.querySelector('input[name="terms"]').setAttribute('placeholder', placeholder)
+
+
 }
 
 window.openprism = exports
