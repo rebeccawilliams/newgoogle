@@ -212,23 +212,26 @@ exports.terms = function() {
   return document.querySelector('#search > input[name="terms"]').value
 }
 
-window.openprism = exports
-
 exports.portals().map(function(portal) {
   document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h1><a href=""></a></h1><em class="portal"></em><div class="desc"></div></section>'
 })
 
 exports._prev_search_terms = exports.terms()
 exports._prev_search_date  = new Date() // So it'll search the first time you press a key. A bit slow, but easy to code and nice feedback
-document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
-  exports._prev_search_date = new Date()
-  setTimeout(function() {
-    var enough_time_passed = (new Date() - exports._prev_search_date) > 500
-    var has_new_terms = exports._prev_search_terms !== exports.terms()
-    if (enough_time_passed && has_new_terms) {
-      exports.page = 1
-      exports._prev_search_terms = exports.terms()
-      exports.search_portals()
-    }
-  }, 500)
-})
+
+exports.main = function() {
+  document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
+    exports._prev_search_date = new Date()
+    setTimeout(function() {
+      var enough_time_passed = (new Date() - exports._prev_search_date) > 500
+      var has_new_terms = exports._prev_search_terms !== exports.terms()
+      if (enough_time_passed && has_new_terms) {
+        exports.page = 1
+        exports._prev_search_terms = exports.terms()
+        exports.search_portals()
+      }
+    }, 500)
+  })
+}
+
+window.openprism = exports
