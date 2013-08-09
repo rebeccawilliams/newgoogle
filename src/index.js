@@ -62,6 +62,7 @@ exports.socrata_portals = [
   'data.acgov.org',
   'data.medicare.gov'
 ]
+exports.socrata_portals = []
 exports.ckan_portals = [
   'datahub.io'
 ]
@@ -84,7 +85,10 @@ exports.ckan = function(terms, portal, page, callback) {
     var results = JSON.parse(body).results
     if (results.length > 0){
       var id = results[0]
-      return callback(id)
+      request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
+        var dataset = JSON.parse(body)
+        return callback(dataset)
+      }
     }
   })
 }
