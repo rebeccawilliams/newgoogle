@@ -73,8 +73,8 @@ exports.socrata = function(terms, portal, page, callback) {
     var results = JSON.parse(body).results
     if (results.length > 0){
       var view = results[0].view
-      delete view.columns
-      return callback(view)
+      var url = 'http://' + portal + '/-/-/' + view.id
+      return exports.render_result(portal, url, view.name, view.description)
     }
   })
 }
@@ -94,6 +94,16 @@ exports.ckan = function(terms, portal, page) {
   })
 }
 
+exports.clear_result = function(portal) {
+  var a = document.querySelector('div[id="' + portal + '"] a')
+  var em = document.querySelector('div[id="' + portal + '"] em')
+  var p = document.querySelector('div[id="' + portal + '"] p')
+
+  a.innerText = ''
+  p.innerText = ''
+  em.innerText = ''
+}
+
 exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
   var a = document.querySelector('div[id="' + portal + '"] a')
@@ -106,20 +116,15 @@ exports.render_result = function(portal, href, name, description) {
   em.innerText = portal
 }
 
-exports.all_portals = function() {
+exports.portals = function() {
+  return exports.socrata_portals.concat(exports.ckan_portals)
+}
+
+exports.search_portals = function() {
+  export.portals().map(exports.clear_result)
   document.querySelector('#search a').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
-    exports.socrata(exports.terms(), portal, exports.page, function(view){
-      document.getElementById(portal).setAttribute('style', '')
-      var a = document.querySelector('div[id="' + portal + '"] a')
-      var em = document.querySelector('div[id="' + portal + '"] em')
-      var p = document.querySelector('div[id="' + portal + '"] p')
-
-      a.href = 'http://' + portal + '/-/-/' + view.id
-      a.innerText = view.name
-      p.innerText = view.description
-      em.innerText = portal
-    })
+    exports.socrata(exports.terms(), portal, exports.page)
   })
   exports.ckan_portals.map(function(portal) {
     exports.ckan(exports.terms(), portal, exports.page)
@@ -129,7 +134,7 @@ exports.all_portals = function() {
 exports.page = 1
 exports.increment_page = function(increment) {
   exports.page += increment
-  exports.all_portals(exports.page)
+  exports.search_portals(exports.page)
 }
 exports.next = function() {
   exports.increment_page(1)
@@ -145,11 +150,11 @@ exports.terms = function() {
 
 window.openprism = exports
 
-exports.socrata_portals.concat(exports.ckan_portals).map(function(portal) {
+exports.portals().map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
   exports.page = 1
-  exports.all_portals()
+  exports.search_portals()
 })
