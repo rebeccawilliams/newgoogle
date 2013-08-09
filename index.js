@@ -1,6 +1,6 @@
 var request = require('browser-request')
 
-exports.portals = [
+exports.socrata_portals = [
   'data.colorado.gov',
   'data.nola.gov',
   'healthmeasures.aspe.hhs.gov',
@@ -76,7 +76,8 @@ exports.socrata = function(terms, portal, page, callback) {
 }
 
 exports.all_portals = function() {
-  exports.portals.map(function(portal) {
+  document.querySelector('#search a').setAttribute('style', '')
+  exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
       document.getElementById(portal).setAttribute('style', '')
       var a = document.querySelector('div[id="' + portal + '"] a')
@@ -115,7 +116,7 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 
 window.openprism = exports
 
-exports.portals.map(function(portal) {
+exports.socrata_portals.map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
