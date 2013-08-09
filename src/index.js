@@ -128,9 +128,9 @@ exports.ckan_portals = [
 exports.socrata = function(terms, portal, page, callback) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
   request(url, function(err, res, body) {
-    var results = JSON.parse(body).results
-    if (results.length > 0){
-      var view = results[0].view
+    var data = JSON.parse(body)
+    if (data.count > 0){
+      var view = data.results[0].view
       var url = 'http://' + portal + '/-/-/' + view.id
       return exports.render_result(portal, url, view.name, '<p>' + view.description + '</p>')
     }
@@ -141,9 +141,9 @@ exports.ckan = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
     if (!err) {
-      var results = JSON.parse(body).results
-      if (results.length > 0){
-        var id = results[0]
+      var data = JSON.parse(body)
+      if (data.results.length > 0){
+        var id = data.results[0]
         request('http://' + portal + '/api/rest/dataset/' + id, function(err, res, body) {
           if (!err) {
             var dataset = JSON.parse(body)
@@ -157,6 +157,7 @@ exports.ckan = function(terms, portal, page) {
 }
 
 exports.clear_result = function(portal) {
+  document.getElementById(portal).setAttribute('style', 'display: none;')
   var a = document.querySelector('section[id="' + portal + '"] a')
   var em = document.querySelector('section[id="' + portal + '"] em')
   var desc = document.querySelector('section[id="' + portal + '"] .desc')
@@ -229,7 +230,7 @@ exports.add_listener = function() {
   document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
     exports._prev_search_date = new Date()
     setTimeout(function() {
-      var enough_time_passed = (new Date() - exports._prev_search_date) > 200
+      var enough_time_passed = (new Date() - exports._prev_search_date) > 300
       var has_new_terms = exports._prev_search_terms !== exports.terms()
       if (enough_time_passed && has_new_terms) {
         exports.page = 1
@@ -237,7 +238,7 @@ exports.add_listener = function() {
 
         exports.search()
       }
-    }, 500)
+    }, 300)
   })
 }
 
@@ -261,11 +262,12 @@ exports.main = function() {
 
   // Random placeholder
   var placeholders = [
-     'crime, death, earmarks, foia, ...',
-     'schools, sewers, shelters, spending, ...',
-     'bunny, kitten, hamster, elephant, ...'
+     'arson, bus stops, campaigns, zoos, ...',
+     'bus stops, restaurants, music, air quality' ,
+     'farms, airports, hospitals, 311, ...', 
+     'schools, sewers, shelters, spending, ...'
   ]
-  var placeholder = placeholders[Math.floor(Math.random()*words.length)]
+  var placeholder = placeholders[Math.floor(Math.random()*placeholders.length)]
   document.querySelector('input[name="terms"]').setAttribute('placeholder', placeholder)
 
 
