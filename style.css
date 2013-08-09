@@ -38,6 +38,9 @@ body {
 h2:before {
   content: '## '
 }
+em {
+  font-style: normal;
+}
 em:before {
   content: '*'
 }

@@ -66,15 +66,19 @@ exports.portals = [
 exports.socrata = function(terms, portal, page, callback) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
   request(url, function(err, res, body) {
-    var view = JSON.parse(body).results[0].view
-    delete view.columns
-    return callback(view)
+    var results = JSON.parse(body).results
+    if (results.length > 0){
+      var view = results[0].view
+      delete view.columns
+      return callback(view)
+    }
   })
 }
 
 exports.all_portals = function() {
   exports.portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
+      document.getElementById(portal).setAttribute('style', '')
       var a = document.querySelector('div[id="' + portal + '"] a')
       var em = document.querySelector('div[id="' + portal + '"] em')
       var p = document.querySelector('div[id="' + portal + '"] p')
@@ -112,7 +116,7 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 window.openprism = exports
 
 exports.portals.map(function(portal) {
-  document.getElementById('result').innerHTML += '<div id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
+  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
