@@ -1,0 +1,29 @@
+{
+    "name": "openprism",
+    "version": "0.0.1",
+    "description": "Search all of the data portals",
+    "main": "index.js",
+    "dependencies": {
+        "browser-request": "~0.2.1"
+    },
+    "devDependencies": {
+        "tap": "~0.4.0"
+    },
+    "scripts": {
+        "test": "tap test/*.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/tlevine/openprism.git"
+    },
+    "homepage": "http://openprism.thomaslevine.com",
+    "keywords": [
+        "web"
+    ],
+    "author": {
+        "name": "Thomas Levine",
+        "email": "occurrence@thomaslevine.com",
+        "url": "http://thomaslevine.com"
+    },
+    "license": "MIT"
+}

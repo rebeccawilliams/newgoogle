@@ -1,2 +1,3 @@
 node_modules
-web/script.js
+npm-debug.log
+bundle.js
