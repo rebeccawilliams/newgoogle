@@ -106,6 +106,8 @@ exports.clear_result = function(portal) {
 
 exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
+  document.getElementById('loading').setAttribute('style', 'display: none;')
+  document.querySelector('#search a').setAttribute('style', '')
   var a = document.querySelector('div[id="' + portal + '"] a')
   var em = document.querySelector('div[id="' + portal + '"] em')
   var desc = document.querySelector('div[id="' + portal + '"] .desc')
@@ -122,7 +124,7 @@ exports.portals = function() {
 
 exports.search_portals = function() {
   exports.portals().map(exports.clear_result)
-  document.querySelector('#search a').setAttribute('style', '')
+  document.getElementById('loading').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
   })
