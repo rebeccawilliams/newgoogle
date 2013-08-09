@@ -229,7 +229,7 @@ exports.add_listener = function() {
   document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
     exports._prev_search_date = new Date()
     setTimeout(function() {
-      var enough_time_passed = (new Date() - exports._prev_search_date) > 500
+      var enough_time_passed = (new Date() - exports._prev_search_date) > 200
       var has_new_terms = exports._prev_search_terms !== exports.terms()
       if (enough_time_passed && has_new_terms) {
         exports.page = 1
