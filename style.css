@@ -81,10 +81,6 @@ main {
   color: white;
 }
 
-.result {
-  background-color: red;
-}
-
 body {
   font-family: monospace;
 }
@@ -121,7 +117,7 @@ body, #result h1, h2, h3, h4, h5, em, p {
   padding: 0;
   font-size: 12px;
 }
-.dataset { margin-bottom: 0.5em; }
+.dataset { margin-bottom: 1em; }
 a, a:visited, a:hover, a:active {
   color: inherit;
 }
