@@ -132,7 +132,8 @@ exports.socrata = function(terms, portal, page, callback) {
     if (data.count > 0){
       var view = data.results[0].view
       var url = 'http://' + portal + '/-/-/' + view.id
-      return exports.render_result(portal, url, view.name, '<p>' + view.description + '</p>')
+      var description = typeof(view.description) === 'undefined' ? '' : '<p>' + view.description + '</p>'
+      return exports.render_result(portal, url, view.name, description)
     }
   })
 }
@@ -177,7 +178,7 @@ exports.render_result = function(portal, href, name, description) {
 
   a.href = href
   a.innerText = name
-  desc.innerHTML = (typeof(description) === 'undefined') ? '' : description
+  desc.innerHTML = description
   em.innerText = portal
 }
 
