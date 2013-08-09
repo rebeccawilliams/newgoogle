@@ -1,9 +1,13 @@
-Type your search one search bar, and get results from all of the Socrata and CKAN portals.
+Type your search in one search bar, and get results from all of the Socrata and CKAN portals.
 
 ## Technical
 This is a static website that calls the Socrata and CKAN APIs. Build like so.
 
-    browserify web/index.js -o bundle.js
+```sh
+npm install -g browserify
+npm install
+browserify web/index.js -o bundle.js
+```
 
 ## References
 
