@@ -62,9 +62,8 @@ exports.socrata_portals = [
   'data.acgov.org',
   'data.medicare.gov'
 ]
-exports.socrata_portals = []
 exports.ckan_portals = [
-  'datahub.io'
+  'datahub.io',
   'opendata.comune.bari.it',
   'africaopendata.org',
   'www.amsterdamopendata.nl/home',
@@ -212,7 +211,7 @@ exports.terms = function() {
 window.openprism = exports
 
 exports.portals().map(function(portal) {
-  document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></section>'
+  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
