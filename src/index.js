@@ -219,13 +219,14 @@ exports.portals().map(function(portal) {
 exports._prev_search_terms = exports.terms()
 exports._prev_search_date  = new Date() // So it'll search the first time you press a key. A bit slow, but easy to code and nice feedback
 
-exports.main = function() {
+exports.main = function(_paq /* for tracking; send an empty array if you don't want that */) {
   document.querySelector('#search > input[name="terms"]').addEventListener('keyup', function() {
     exports._prev_search_date = new Date()
     setTimeout(function() {
       var enough_time_passed = (new Date() - exports._prev_search_date) > 500
       var has_new_terms = exports._prev_search_terms !== exports.terms()
       if (enough_time_passed && has_new_terms) {
+        _paq.push(['trackSiteSearch', exports.terms(), false, false])
         exports.page = 1
         exports._prev_search_terms = exports.terms()
         exports.search_portals()
