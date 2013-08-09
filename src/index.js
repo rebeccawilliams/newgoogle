@@ -153,7 +153,7 @@ exports.terms = function() {
 window.openprism = exports
 
 exports.portals().map(function(portal) {
-  document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></div>'
+  document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><div class="desc"></div></section>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {

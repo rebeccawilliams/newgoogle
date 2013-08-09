@@ -36,6 +36,9 @@ body {
   font-family: monospace;
 }
 
+section h1:before {
+  content: '# '
+}
 h2:before {
   content: '## '
 }
@@ -60,7 +63,7 @@ em:after {
   content: '*'
 }
 
-h2, h3, h4, h5, em, p {
+section h1, h2, h3, h4, h5, em, p {
   margin: 0;
   padding: 0;
   font-size: 12px;
