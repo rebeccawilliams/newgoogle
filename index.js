@@ -75,6 +75,19 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
+exports.ckan = function(terms, portal, page, callback) {
+  var url = 'http://' + portal + '/api/3/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
+  request(url, function(err, res, body) {
+    var results = JSON.parse(body).results
+    if (results.length > 0){
+      var id = results[0]
+      request('http://' + portal + '/dataset/' + id, function(err, res, body) {
+        return callback(view)
+      })
+    }
+  })
+}
+
 exports.all_portals = function() {
   document.querySelector('#search a').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
