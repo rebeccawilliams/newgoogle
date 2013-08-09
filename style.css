@@ -32,7 +32,7 @@ main {
 }
 
 body {
-  font: monospace;
+  font-family: monospace;
 }
 
 h2:before {
