@@ -62,6 +62,9 @@ exports.socrata_portals = [
   'data.acgov.org',
   'data.medicare.gov'
 ]
+exports.ckan_portals = [
+  'datahub.io'
+]
 
 exports.socrata = function(terms, portal, page, callback) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
@@ -88,6 +91,7 @@ exports.ckan = function(terms, portal, page, callback) {
 
 exports.all_portals = function() {
   document.querySelector('#search a').setAttribute('style', '')
+  /*
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
       document.getElementById(portal).setAttribute('style', '')
@@ -101,6 +105,7 @@ exports.all_portals = function() {
       em.innerText = portal
     })
   })
+  */
   exports.ckan_portals.map(function(portal) {
     exports.ckan(exports.terms(), portal, exports.page, function(id){
       document.getElementById(portal).setAttribute('style', '')
@@ -140,7 +145,7 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 
 window.openprism = exports
 
-exports.socrata_portals.map(function(portal) {
+exports.ckan_portals.map(function(portal) {
   document.getElementById('result').innerHTML += '<div style="display: none;" id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
