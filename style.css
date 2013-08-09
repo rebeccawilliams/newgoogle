@@ -10,7 +10,7 @@ header {
   text-align: center;
 }
 
-main, form#search {
+main, #search {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
@@ -20,7 +20,7 @@ main {
   max-width: 960px;
 }
 
-form#search input[name="terms"] {
+#search input[name="terms"] {
   width: 100%;
   height: 2em;
   margin-top: 0.5em;

@@ -75,7 +75,14 @@ exports.socrata = function(terms, portal, page, callback) {
 exports.all_portals = function() {
   exports.portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page, function(view){
-      document.getElementById(portal).innerText = view.name
+      var a = document.querySelector('div[id="' + portal + '"] a')
+      var em = document.querySelector('div[id="' + portal + '"] em')
+      var p = document.querySelector('div[id="' + portal + '"] p')
+
+      a.href = 'http://' + portal + '/-/-/' + view.id
+      a.innerText = view.name
+      p.innerText = view.description
+      em.innerText = portal
     })
   })
 }
@@ -105,13 +112,10 @@ exports.socrata('elevator', 'data.cityofnewyork.us', 1, function(view) {
 window.openprism = exports
 
 exports.portals.map(function(portal) {
-  document.getElementById('result').innerHTML += '<div id="' + portal + '" class="dataset"></div>'
+  document.getElementById('result').innerHTML += '<div id="' + portal + '" class="dataset"><h2><a href=""></a></h2><em class="portal"></em><p></p></div>'
 })
 
 document.querySelector('#search > input[name="terms"]').addEventListener('change', function() {
   exports.page = 1
   exports.all_portals()
 })
-
-// document.getElementById('next').addEventListener('click', exports.next)
-// document.getElementById('prev').addEventListener('click', exports.prev)
