@@ -30,3 +30,33 @@ main {
 .result {
   background-color: red;
 }
+
+body {
+  font: monospace;
+}
+
+h2:before {
+  content: '## '
+}
+em:before {
+  content: '*'
+}
+em:after {
+  content: '*'
+}
+
+h2, em, p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+.dataset { margin-bottom: 0.5em; }
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+a, a:visited {
+  text-decoration: inherit;
+}
+a:hover, a:active {
+  text-decoration: inherit;
+}
