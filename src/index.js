@@ -138,6 +138,21 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
+exports.junar = function(terms, portal, page, callback) {
+  // paloalto.cloudapi.junar.com -> paloalto.opendata.junar.com
+  var api = 'http://' + portal.replace('opendata.junar.com', 'cloudapi.junar.com')
+
+  var api_key = 'ff5a9dcb0f57a994cdac1da7a1ce3c71264616df'
+  var url = api + '/datastreams/search?query=' + encodeURIComponent(terms) + '&auth_key=' + api_key + '&max_results=' + page
+  request(url, function(err, res, body) {
+    var data = JSON.parse(body)
+    if (!err && data.length > 0){
+      var view = data.pop()
+      return exports.render_result(portal, view.link, view.title, view.description)
+    }
+  })
+}
+
 exports.ckan = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/search/dataset?q=' + encodeURIComponent(terms) + '&start=' + page + '&rows=1'
   request(url, function(err, res, body) {
