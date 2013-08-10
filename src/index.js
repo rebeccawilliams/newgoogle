@@ -1,5 +1,5 @@
 var request = require('browser-request')
-var jsonpClient = require('jsonp-client');
+var jsonp = require('dlite-jsonp');
 
 exports.socrata_portals = [
   'data.colorado.gov',
@@ -144,13 +144,9 @@ exports.junar = function(terms, portal, page) {
   var api = 'http://' + portal.replace('opendata.junar.com', 'cloudapi.junar.com')
 
   var api_key = 'ff5a9dcb0f57a994cdac1da7a1ce3c71264616df'
-  var url = api + '/datastreams/search?query=' + encodeURIComponent(terms) + '&auth_key=' + api_key + '&max_results=' + page + '&callback=c' // + (new Date()).getTime()
-  jsonpClient(url, function(err, data) {
-    // console.log(url, err, data)
-    if (err) {
-      console.log(err.message, url)
-      window.err = err
-    } else if (data.length > 0){
+  var url = api + '/datastreams/search?query=' + encodeURIComponent(terms) + '&auth_key=' + api_key + '&max_results=' + page + '&callback=%3F'
+  jsonp(url, function(data) {
+    if (data && data.length > 0) {
       var view = data.pop()
       return exports.render_result(portal, view.link, view.title, view.description)
     }
