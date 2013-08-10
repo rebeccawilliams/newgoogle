@@ -63,6 +63,25 @@ exports.socrata_portals = [
   'data.acgov.org',
   'data.medicare.gov'
 ]
+exports.junar_portals = [
+  // https://twitter.com/javierpajaro/status/363332649072336896
+  'datos.gob.cl',
+  'lima.datosabiertos.pe',
+  'bahiablanca.opendata.junar.com',
+  'recursos.penalolen.opendata.junar.com',
+  'datosabiertos.gob.go.cr',
+
+  // https://twitter.com/javierpajaro/status/363333894931628034
+  'paloalto.opendata.junar.com',
+  'cupertino.opendata.junar.com',
+  'data.sanjoseca.gov',
+  // 'sacramento.opendata.junar.com',
+
+  // https://twitter.com/javierpajaro/status/363333894931628034
+  'www.opendatalatinoamerica.org',
+  'data.lanacion.com.ar',
+  'infodatos.opendata.junar.com'
+]
 exports.ckan_portals = [
   'datahub.io',
   'opendata.comune.bari.it',
