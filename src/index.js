@@ -1,4 +1,5 @@
 var request = require('browser-request')
+var jsonpClient = require('jsonp-client');
 
 exports.socrata_portals = [
   'data.colorado.gov',
@@ -125,7 +126,7 @@ exports.ckan_portals = [
   'dati.toscana.it'
 ]
 
-exports.socrata = function(terms, portal, page, callback) {
+exports.socrata = function(terms, portal, page) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
   request(url, function(err, res, body) {
     var data = JSON.parse(body)
@@ -138,16 +139,17 @@ exports.socrata = function(terms, portal, page, callback) {
   })
 }
 
-exports.junar = function(terms, portal, page, callback) {
+exports.junar = function(terms, portal, page) {
   // paloalto.cloudapi.junar.com -> paloalto.opendata.junar.com
   var api = 'http://' + portal.replace('opendata.junar.com', 'cloudapi.junar.com')
 
   var api_key = 'ff5a9dcb0f57a994cdac1da7a1ce3c71264616df'
-  var url = api + '/datastreams/search?query=' + encodeURIComponent(terms) + '&auth_key=' + api_key + '&max_results=' + page
-  request(url, function(err, res, body) {
-    var data = JSON.parse(body)
+  var url = api + '/datastreams/search?query=' + encodeURIComponent(terms) + '&auth_key=' + api_key + '&max_results=' + page + '&callback=one'
+  console.log(url)
+  jsonpClient(url, function(err, body) {
     if (!err && data.length > 0){
       var view = data.pop()
+      window.view = view
       return exports.render_result(portal, view.link, view.title, view.description)
     }
   })

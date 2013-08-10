@@ -6,6 +6,7 @@
     "dependencies": {
         "browser-request": "~0.2.1",
         "director": "~1.2.0",
+        "jsonp-client": "~0.2.1",
         "request": "~2.26.0"
     },
     "devDependencies": {
