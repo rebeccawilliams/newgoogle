@@ -81,7 +81,9 @@ exports.junar_portals = [
   'www.opendatalatinoamerica.org',
   'data.lanacion.com.ar',
   'infodatos.opendata.junar.com'
-]
+].filter(function(portal) {
+  return portal.match('.opendata.junar.com')
+})
 exports.ckan_portals = [
   'datahub.io',
   'opendata.comune.bari.it',
