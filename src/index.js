@@ -317,7 +317,7 @@ exports.clear_result = function(portal) {
 exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
   document.getElementById('loading').setAttribute('style', 'display: none;')
-  document.querySelector('#search a').setAttribute('style', '')
+  document.querySelector('#search a.next').setAttribute('style', '')
   var a = document.querySelector('section[id="' + portal + '"] a')
   var em = document.querySelector('section[id="' + portal + '"] em')
   var desc = document.querySelector('section[id="' + portal + '"] .desc')
