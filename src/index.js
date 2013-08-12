@@ -318,6 +318,7 @@ exports.render_result = function(portal, href, name, description) {
   document.getElementById(portal).setAttribute('style', '')
   document.getElementById('loading').setAttribute('style', 'display: none;')
   document.querySelector('#search a.next').setAttribute('style', '')
+  document.querySelector('#search p.chrome').setAttribute('style', 'display: none;')
   var a = document.querySelector('section[id="' + portal + '"] a')
   var em = document.querySelector('section[id="' + portal + '"] em')
   var desc = document.querySelector('section[id="' + portal + '"] .desc')
