@@ -329,7 +329,7 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.ckan_portals)
+  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals))
 }
 
 exports.search = function() {
@@ -344,6 +344,9 @@ exports.search = function() {
   document.getElementById('loading').setAttribute('style', '')
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
+  })
+  exports.junar_portals.map(function(portal) {
+    exports.junar(exports.terms(), portal, exports.page)
   })
   exports.ckan_portals.map(function(portal) {
     exports.ckan(exports.terms(), portal, exports.page)
