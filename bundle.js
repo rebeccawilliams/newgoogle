@@ -149,7 +149,9 @@ exports.ckan_portals = [
 ]
 exports.opendatasoft_portals = [
   'parisdata.opendatasoft.com',
-  'datailedefrance.opendatasoft.com'
+  'datailedefrance.opendatasoft.com',
+  'public.opendatasoft.com',
+  'scisf.opendatasoft.com'
 ]
 
 exports.socrata = function(terms, portal, page) {
@@ -362,15 +364,15 @@ exports.search = function() {
 
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
-//exports.socrata_portals.map(function(portal) {
-//  exports.socrata(exports.terms(), portal, exports.page)
-//})
-//exports.junar_portals.map(function(portal) {
-//  exports.junar(exports.terms(), portal, exports.page)
-//})
-//exports.ckan_portals.map(function(portal) {
-//  exports.ckan(exports.terms(), portal, exports.page)
-//})
+  exports.socrata_portals.map(function(portal) {
+    exports.socrata(exports.terms(), portal, exports.page)
+  })
+  exports.junar_portals.map(function(portal) {
+    exports.junar(exports.terms(), portal, exports.page)
+  })
+  exports.ckan_portals.map(function(portal) {
+    exports.ckan(exports.terms(), portal, exports.page)
+  })
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
   })
