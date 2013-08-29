@@ -148,7 +148,9 @@ exports.ckan_portals = [
 ]
 exports.opendatasoft_portals = [
   'parisdata.opendatasoft.com',
-  'datailedefrance.opendatasoft.com'
+  'datailedefrance.opendatasoft.com',
+  'public.opendatasoft.com',
+  'scisf.opendatasoft.com'
 ]
 
 exports.socrata = function(terms, portal, page) {
