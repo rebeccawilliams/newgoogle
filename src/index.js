@@ -146,6 +146,10 @@ exports.ckan_portals = [
   'thedatahub.org',
   'dati.toscana.it'
 ]
+exports.opendatasoft_portals = [
+  'parisdata.opendatasoft.com',
+  'datailedefrance.opendatasoft.com'
+]
 
 exports.socrata = function(terms, portal, page) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
@@ -303,6 +307,20 @@ exports.ckan = function(terms, portal, page) {
   })
 }
 
+exports.opendatasoft = function(terms, portal, page) {
+  var url = 'http://' + portal + '/api/datasets/1.0/search?rows=1&q=' + encodeURIComponent(terms) + '&start=' + page
+  request(url, function(err, res, body) {
+    if (!err) {
+      var data = JSON.parse(body)
+      if (data.nhits > 0) {
+        var dataset = data.datasets[0]
+        var datasetUrl = 'http://' + portal + '/explore/dataset/' + dataset.datasetid
+        return exports.render_result(portal, datasetUrl, dataset.metas.title, dataset.metas.description)
+      }
+    }
+  })
+}
+
 exports.clear_result = function(portal) {
   document.getElementById(portal).setAttribute('style', 'display: none;')
   var a = document.querySelector('section[id="' + portal + '"] a')
@@ -330,7 +348,7 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals))
+  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals)))
 }
 
 exports.search = function() {
@@ -351,6 +369,9 @@ exports.search = function() {
   })
   exports.ckan_portals.map(function(portal) {
     exports.ckan(exports.terms(), portal, exports.page)
+  })
+  exports.opendatasoft_portals.map(function(portal) {
+    exports.opendatasoft(exports.terms(), portal, exports.page)
   })
 }
 
