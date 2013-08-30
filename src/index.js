@@ -147,10 +147,16 @@ exports.ckan_portals = [
   'dati.toscana.it'
 ]
 exports.opendatasoft_portals = [
-  'parisdata.opendatasoft.com',
-  'datailedefrance.opendatasoft.com',
-  'public.opendatasoft.com',
-  'scisf.opendatasoft.com'
+  'data.iledefrance.fr',
+  'opendata.paris.fr.opendatasoft.com',
+  'tourisme04.opendatasoft.com',
+  'tourisme62.opendatasoft.com',
+  'grandnancy.opendatasoft.com'
+  'bistrotdepays.opendatasoft.com',
+  'scisf.opendatasoft.com',
+  'pod.opendatasoft.com',
+  'dataratp.opendatasoft.com',
+  'public.opendatasoft.com'
 ]
 
 exports.socrata = function(terms, portal, page) {
