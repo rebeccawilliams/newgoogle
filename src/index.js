@@ -151,7 +151,7 @@ exports.opendatasoft_portals = [
   'opendata.paris.fr.opendatasoft.com',
   'tourisme04.opendatasoft.com',
   'tourisme62.opendatasoft.com',
-  'grandnancy.opendatasoft.com'
+  'grandnancy.opendatasoft.com',
   'bistrotdepays.opendatasoft.com',
   'scisf.opendatasoft.com',
   'pod.opendatasoft.com',
