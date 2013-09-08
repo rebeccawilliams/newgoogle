@@ -1,5 +1,13 @@
-var request = require('browser-request')
-var jsonp = require('dlite-jsonp');
+// var request = require('browser-request')
+var jQuery = require('jquery-browserify')
+function request(url, callback) {
+  jQuery.getJSON(url, null)
+    .done(function(json) {callback(null, null, JSON.stringify(json))})
+    .fail(function(jqxhr, textStatus, error ) {
+      callback(textStatus + ', ' + error, null, null)
+    })
+}
+var jsonp = require('dlite-jsonp')
 
 exports.socrata_portals = [
   'data.colorado.gov',
