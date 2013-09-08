@@ -343,9 +343,9 @@ exports.clear_result = function(portal) {
   var em = document.querySelector('section[id="' + portal + '"] em')
   var desc = document.querySelector('section[id="' + portal + '"] .desc')
 
-  a.innerText = ''
+  a.textContent = ''
   desc.innerHTML = ''
-  em.innerText = ''
+  em.textContent = ''
 }
 
 exports.render_result = function(portal, href, name, description) {
@@ -358,9 +358,9 @@ exports.render_result = function(portal, href, name, description) {
   var desc = document.querySelector('section[id="' + portal + '"] .desc')
 
   a.href = href
-  a.innerText = name
+  a.textContent = name
   desc.innerHTML = description
-  em.innerText = portal
+  em.textContent = portal
 }
 
 exports.portals = function() {
