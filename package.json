@@ -1,0 +1,26 @@
+{
+  "name": "openprism",
+  "version": "0.0.0",
+  "description": "Type your search in one search bar, and get results from loads of open data portals.",
+  "main": "src/index.js",
+  "dependencies": {
+    "browser-request": "~0.2.1",
+    "jsonp": "~0.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tlevine/openprism.git"
+  },
+  "keywords": [
+    "opendata"
+  ],
+  "author": "Thomas Levine <occurrence@thomaslevine.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/tlevine/openprism/issues"
+  }
+}
