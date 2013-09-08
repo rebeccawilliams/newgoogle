@@ -1,11 +1,5 @@
 var request = require('browser-request')
-
-// Because this JSONP library doesn't work in Firefox
-// var jsonp = require('dlite-jsonp');
-var jQuery = require('jquery-browserify')
-function jsonp(url, callback) {
-  jQuery.getJSON(url + '?callback=c' + ((new Date()).getTime()), null, callback)
-}
+var jsonp = require('dlite-jsonp');
 
 exports.socrata_portals = [
   'data.colorado.gov',
@@ -459,5 +453,4 @@ exports.main = function() {
 
 }
 
-// window.openprism = exports
-window.jQuery = jQuery
+window.openprism = exports
