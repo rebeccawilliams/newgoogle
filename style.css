@@ -38,6 +38,7 @@ header {
   padding-bottom: 2em;
   background-color: black;
   text-align: center;
+  color: white;
 }
 
 header h1 {
@@ -51,7 +52,6 @@ header nav {
 }
 header nav {
   line-height: 1.3em;
-  color: white;
 }
 
 main, #search {
