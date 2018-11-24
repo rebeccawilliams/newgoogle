@@ -37,6 +37,7 @@ header {
   height: 7em;
   padding-bottom: 2em;
   background-color: black;
+  text-align: center;
 }
 
 header h1 {
