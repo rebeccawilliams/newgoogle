@@ -15,14 +15,22 @@
     <header>
       <h1><img src="https://raw.githubusercontent.com/rebeccawilliams/newgoogle/gh-pages/festisite_google.png"></h1>
       <h1><img src="https://raw.githubusercontent.com/rebeccawilliams/newgoogle/gh-pages/festisite_fordatasetsonly.png"></h1>
+      <nav>
+         <ul>
+          <li>This is all made by <a href="https://github.com/tlevine/openprism">@tlevine</a>, but damn it if I don't think it's the NEW Google.</li>	          <li>The New Google is datasets only.</li> 
+          <li>Read more about how he made it <a href="http://thomaslevine.com/!/openprism/">here</a>.</li>	
+          <li>And see even more open data portals <a href="https://github.com/sunlightpolicy/opendata/blob/master/USlocalopendataportals.csv">here</a>.</li>	
+         </ul>
+       </nav>
     </header>
     <main>
       <div id="search">
         <label for="terms"></label>
         <input name="terms" type="text" placeholder="schools, sewers, shelters, spending, ..." />
+        <a href="javascript:openprism.search()" class="search">search</a>	        <a href="javascript:openprism.search()" class="search">search</a>
+        <p class="chrome">Original source code from openprism.thomaslevine.com, maintained by Rebecca Williams. If you like this, you may also like: https://toolbox.google.com/datasetsearch</p>
         <a href="javascript:openprism.next()" class="next" style="display: none;">more</a>
       </div>
-      <p>Original source code from openprism.thomaslevine.com, maintained by Rebecca Williams. If you like this, you may also like: https://toolbox.google.com/datasetsearch</p>
       <div id="loading" style="display: none;">loading</div>
       <div id="result"></div>
     </main>
