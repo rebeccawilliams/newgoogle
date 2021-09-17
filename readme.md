@@ -1,23 +1,5 @@
-##The work of @tlevine:
+# Imagine Google, but for government info
 
+Years later "New Google" seems less satisfying, but at the time I was imagining a Google for government activity. New Google searches across government databases, a rogue Data.gov if you will. I made this from open source code by @tlevine (built on gov data portal APIs) before working at the real Data.gov and before Google launched their Google Dataset Search.
 
-----
-
-Type your search in one search bar, and get results from all of the Socrata and CKAN portals.
-
-## Technical
-This is a static website that calls the Socrata and CKAN APIs. Build like so.
-
-```sh
-npm install -g browserify
-npm install
-browserify web/index.js -o bundle.js
-```
-
-## References
-
-Data portal search API documentation
-
-* [Junar](http://wiki.junar.com/index.php/API)
-* [Socrata](https://github.com/jasonlally/open-data-browser/blob/dev/data/dataportalapi.py)
-* [CKAN](http://docs.ckan.org/en/ckan-1.7/apiv3.html)
+[New Google](https://rebeccawilliams.github.io/newgoogle/#/)
